@@ -11,15 +11,12 @@ const listContacts = async () => {
   return await readData()
 }
 
+
 const getContactById = async (id) => {
   const data = await readData()
-  const index = data.findIndex((contact) => contact.id === id)
-  if (index !== -1) {
-    const result = data.splice(index, 1)
-    await fs.writeFile(path.join(__dirname, 'contacts.json'), JSON.stringify(data))
-    return result
-  }
-  return null
+  const result = data.find((contact) => contact.id === id)
+  
+  return result
 }
 
 const removeContact = async (id) => {
@@ -38,15 +35,16 @@ const addContact = async (body) => {
     ...(body.isVaccinated ? {} : { isVaccinated: false }),
   }
   const data = await readData()
+  const newRecord = [...data, record]
   data.push(record)
   await fs.writeFile(path.join(__dirname, 'contacts.json'), JSON.stringify(data))
-  return record
+  return newRecord
 }
 
 
 const updateContact = async (id, body) => {
   const data = await readData()
-  const [result] = data.filter((contact) => contact.id === id)
+  const result = data.find((contact) => contact.id === id)
   if (result) {
     Object.assign(result, body)
   await fs.writeFile(path.join(__dirname, 'contacts.json'), JSON.stringify(data))
@@ -61,3 +59,4 @@ module.exports = {
   addContact,
   updateContact,
 }
+

@@ -41,7 +41,7 @@ router.post('/', validationCreateContact, async (req, res, next) => {
     next(e)
   }
 })
-
+ 
 router.delete('/:id', async (req, res, next) => {
   try {
     const contact = await Contacts.removeContact(req.params.id)
