@@ -1,21 +1,21 @@
 const Joi = require('joi');
-
+const mongoose = require('mongoose')
 const schemaCreateContact = Joi.object({
     name: Joi.string().alphanum().min(3).max(30).required(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }).required(),
     phone: Joi.string().required(),
-    isVaccinated: Joi.boolean().optional()
+    favorite: Joi.boolean().optional()
 })
 
 const schemaUpdateContact = Joi.object({
     name: Joi.string().alphanum().min(3).max(30).optional(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }).optional(),
     phone: Joi.number().integer().min(10**9).max(10**10 - 1).optional(),
-    isVaccinated: Joi.boolean().optional(),
-}).or('name', 'email', 'phone', 'isVaccinated')
+    favorite: Joi.boolean().optional(),
+}).or('name', 'email', 'phone', 'favorite')
 
 const schemaUpdateStatusContact = Joi.object({
-    isVaccinated: Joi.boolean().required()
+    favorite: Joi.boolean().required()
 })
    
 
@@ -40,5 +40,14 @@ module.exports = {
     },
     validationUpdateStatusContact: (req, res, next) => {
         return validate(schemaUpdateStatusContact, req.body, next)
+    },
+    validateMongoId: (req, res, next) => {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+              next({
+            status: 400,
+            message: 'Invalid ObjectId',
+        })
+        }
+        next()
     }
 }
