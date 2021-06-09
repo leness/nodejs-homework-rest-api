@@ -54,7 +54,6 @@ const logout = async (req, res, next) => {
   const id = req.user.id
   try {
     await Users.updateToken(id, null)
-    // const user = await Users.listContacts()
     return res.status(HttpCode.NO_CONTENT).json({})
   } catch (e) {
     next(e)

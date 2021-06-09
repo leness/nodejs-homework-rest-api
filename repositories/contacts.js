@@ -1,10 +1,7 @@
 const Contact = require('../model/contact')
 
 const listContacts = async (userId, query) => {
-  // const results = await Contact.find({ owner: userId }).populate({
-  //   path: 'owner',
-  //   select: 'name email gender -_id',
-  // })
+  
   const {
     sortBy,
     sortByDesc,
@@ -17,7 +14,7 @@ const listContacts = async (userId, query) => {
   const optionsSearch = { owner: userId }
   if (favorite !== null) {
   optionsSearch.favorite = favorite
-}
+  }
 
   const results = await Contact.paginate(optionsSearch, { 
     limit, 
