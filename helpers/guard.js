@@ -16,7 +16,7 @@ const guard = (req, res, next) => {
         code: HttpCode.UNAUTHORIZED,
         message: 'Not authorized',
       })
-    }
+    } 
 
     req.user = user // res.locals.user = user
     return next()

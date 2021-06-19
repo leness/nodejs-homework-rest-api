@@ -18,7 +18,9 @@ const getContactById = async (req, res, next) => {
      console.log(contact.info);
      return res.json({ status: 'success', code: 200, data: { contact } })
    }
-     return res.json({ status: 'error', code: 404, massage: 'Not found'})
+    return res
+      .status(404)
+      .json({ status: 'error', code: 404, massage: 'Not found' })
   } catch (e) {
     next(e)
   }
@@ -28,7 +30,9 @@ const addContact = async (req, res, next) => {
   try {
      const userId = req.user.id
     const contact = await Contacts.addContact( userId, req.body )
-     return res.status(201).json({ status: 'success', code: 201, data: { contact } })
+     return res
+     .status(201)
+     .json({ status: 'success', code: 201, data: { contact } })
    } catch (e) {
      if (e.name === 'ValidationError') {
        e.status = 400
@@ -55,9 +59,13 @@ const updateContact = async (req, res, next) => {
     const userId = req.user.id
     const contact = await Contacts.updateContact(userId, req.params.id, req.body)
     if (contact) {
-      return res.json({ status: 'success', code: 200, data: { contact } })
+      return res
+        .status(200)
+        .json({ status: 'success', code: 200, data: { contact } })
     }
-    return res.json({ status: 'error', code: 404, message: 'Not found' })
+    return res
+      .status(404)
+      .json({ status: 'error', code: 404, message: 'Not found' })
   } catch (e) {
     next(e)
   }

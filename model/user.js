@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose')
-const {Gender} = require('../helpers/constants')
+const gr = require('gravatar')
+const { Gender } = require('../helpers/constants')
 const bcrypt = require('bcryptjs')
 const SALT_WORK_FACTOR = 8
 
@@ -25,6 +26,12 @@ const SALT_WORK_FACTOR = 8
     },
     password: { type: String, required: true },
     token: { type: String, default: null },
+    avatar: {
+      type: String,
+      default: function () {
+        return gr.url(this.email, {s: '250'}, true)
+      }
+    },
     phone: { type: String },
     favorite: { type: Boolean, default: false },
     },
