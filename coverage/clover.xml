@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1624050112328" clover="3.2.0">
-  <project timestamp="1624050112328" name="All files">
+<coverage generated="1624170933652" clover="3.2.0">
+  <project timestamp="1624170933652" name="All files">
     <metrics statements="319" coveredstatements="238" conditionals="56" coveredconditionals="30" methods="54" coveredmethods="26" elements="429" coveredelements="294" complexity="0" loc="319" ncloc="319" packages="11" files="19" classes="19"/>
     <package name="nodejs-homework-rest-api">
       <metrics statements="28" coveredstatements="24" conditionals="8" coveredconditionals="2" methods="3" coveredmethods="0"/>

@@ -64,7 +64,7 @@ describe('Test route users', () => {
   //     .attach('avatar', buf, 'avatar-female.png')
   //   expect(response.status).toEqual(200)
   //   expect(response.body).toBeDefined()
-  //   expect(response.body.data).toEqual('secure_url')
+  //   expect(response.body.data.avatarUrl).toEqual('secure_url')
   // })
 })
 
