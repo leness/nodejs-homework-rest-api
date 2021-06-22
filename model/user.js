@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 const gr = require('gravatar')
 const { Gender } = require('../helpers/constants')
 const bcrypt = require('bcryptjs')
+const { nanoid } = require('nanoid')
 const SALT_WORK_FACTOR = 8
 
   const userSchema = new Schema({
@@ -34,7 +35,13 @@ const SALT_WORK_FACTOR = 8
     },
     phone: { type: String },
     favorite: { type: Boolean, default: false },
+    isVerified: { type: String, default: false },
+    verifyToken: {
+      type: String,
+      required: true,
+      default: nanoid(),
     },
+  },
     {
     versionKey: false,
     timestamps: true,
@@ -56,4 +63,4 @@ userSchema.methods.isValidPassword = async function (password) {
 
 const User = model('user', userSchema)
 
-module.exports = User
+module.exports = User 
